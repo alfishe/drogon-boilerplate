@@ -9,6 +9,7 @@ project (drogon-boilerplate
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set paths
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Set specific build options for Drogon framework (located in lib/drogon)
@@ -28,8 +29,10 @@ add_executable(drogon-boilerplate
     src/hello_world_api.h
 )
 
+# Allow compiler to find jsoncpp headers
 target_include_directories(${PROJECT_NAME} PRIVATE JSONCPP_INCLUDE_DIRS)
 
+# Link service executable with Drogon library
 target_link_libraries(${PROJECT_NAME} PRIVATE
     drogon
 )
