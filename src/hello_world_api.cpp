@@ -1,19 +1,16 @@
-#include <drogon/HttpController.h>
+#include "hello_world_api.h"
+
 
 namespace api
 {
     namespace v1
     {
-        class HelloWorld : public drogon::HttpController<HelloWorld>
+        void HelloWorld::get(const drogon::HttpRequestPtr &req, std::function<void(const drogon::HttpResponsePtr &)> &&callback) const
         {
-        public:
-            HelloWorld() = default;
-
-            METHOD_LIST_BEGIN
-            METHOD_ADD(HelloWorld::get, "", drogon::Get); //path is /api/v1/helloworld
-            METHOD_LIST_END
-
-            void get(const drogon::HttpRequestPtr &req, std::function<void(const drogon::HttpResponsePtr &)> &&callback) const;
-        };
-    } // namespace v1
-} // namespace api
+            Json::Value ret;
+            ret["message"] = "Hello, World!";
+            auto resp = drogon::HttpResponse::newHttpJsonResponse(ret);
+            callback(resp);
+        }
+    }
+}

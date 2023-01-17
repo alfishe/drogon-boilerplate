@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+# Set specific build options for Drogon framework (located in lib/drogon)
 option(BUILD_CTL "Build drogon_ctl" OFF)
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_ORM "Build orm" OFF)

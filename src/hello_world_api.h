@@ -12,7 +12,7 @@ namespace api
             HelloWorld() = default;
 
             METHOD_LIST_BEGIN
-                METHOD_ADD(HelloWorld::get, "", drogon::Get); //path is /api/v1/helloworld
+                METHOD_ADD(HelloWorld::get, "", drogon::Get); //path is /api/v1/
             METHOD_LIST_END
 
             void get(const drogon::HttpRequestPtr &req, std::function<void(const drogon::HttpResponsePtr &)> &&callback) const;
