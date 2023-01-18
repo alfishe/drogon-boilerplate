@@ -1,5 +1,5 @@
 #include "hello_world_api.h"
-
+#include "data_access.h"
 
 namespace api
 {
@@ -11,6 +11,17 @@ namespace api
             ret["message"] = "Hello, World!";
             auto resp = drogon::HttpResponse::newHttpJsonResponse(ret);
             callback(resp);
+        }
+
+        void HelloWorld::cities(const drogon::HttpRequestPtr &req, std::function<void(const drogon::HttpResponsePtr &)> &&callback) const
+        {
+            auto response(drogon::HttpResponse::newHttpResponse());
+
+            std::string payload = DataAccess::getData();
+
+            response->setStatusCode(drogon::HttpStatusCode::k200OK);
+            response->setBody(payload);
+            return callback(response);
         }
     }
 }
