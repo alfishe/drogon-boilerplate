@@ -1,5 +1,5 @@
-#include "hello_world_api.h"
-#include "data_access.h"
+#include "service/hello_world_api.h"
+#include "data/data_access.h"
 
 #include <string>
 #include <sstream>

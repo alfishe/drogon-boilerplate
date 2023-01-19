@@ -1,5 +1,10 @@
 cmake_minimum_required (VERSION 3.10)
 
+# Global options
+#option(BUILD_TESTS "Build tests instead of webservice" OFF)
+
+message(STATUS "<< top CMakeLists.txt")
+
 project (drogon-boilerplate
     VERSION 1.0.0
     DESCRIPTION ""
@@ -10,49 +15,25 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set paths
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+get_filename_component(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
+set(CMAKE_MODULE_PATH ${ROOT_DIR}/cmake)
 message("CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}")
 
-# Set specific build options for Drogon framework (located in lib/drogon)
-option(BUILD_CTL "Build drogon_ctl" OFF)
-option(BUILD_EXAMPLES "Build examples" OFF)
-option(BUILD_ORM "Build orm" OFF)
-option(COZ_PROFILING "Use coz for profiling" OFF)
-option(BUILD_SHARED_LIBS "Build drogon as a shared lib" OFF)
-option(BUILD_DOC "Build Doxygen documentation" OFF)
-option(BUILD_BROTLI "Build Brotli" OFF)
-add_subdirectory(lib/drogon)
 
+if (BUILD_TESTS)
+    message(STATUS "Tests will be built")
+    add_subdirectory(test)
+else ()
+    add_subdirectory(src)
+endif ()
 
-add_executable(${PROJECT_NAME}
-    src/main.cpp
-    src/hello_world_api.cpp
-    src/hello_world_api.h
-    src/data_access.cpp
-    src/data_access.h
-)
+# <Diagnostics>
+message(STATUS "<Top diagnostics>")
+message(STATUS "  PROJECT_NAME:        ${PROJECT_NAME}")
+message(STATUS "  BUILD_TESTS:         ${BUILD_TESTS}")
 
-# libpqxx
-find_package(LibPQXX REQUIRED)
-if (LIBPQXX_FOUND)
-    #target_link_directories(${PROJECT_NAME} PRIVATE ${LIBPQXX_LIBRARY_DIRS})
+message(STATUS "</Top diagnostics>")
+# </Diagnostics>
 
-    # Resolve full name to pqxx dynamic library
-    find_library(PQXX_LIB
-        NAMES pqxx # what to look for
-        HINTS "${LIBPQXX_LIBRARY_DIRS}" # where to look
-        NO_DEFAULT_PATH # do not search system default paths
-    )
+message(STATUS "<< top CMakeLists.txt")
 
-    message("LIBPQXX_LIBRARY_DIRS: ${LIBPQXX_LIBRARY_DIRS}")
-    message("PQXX_LIB: ${PQXX_LIB}")
-endif()
-
-# Allow compiler to find jsoncpp headers
-target_include_directories(${PROJECT_NAME} PRIVATE JSONCPP_INCLUDE_DIRS)
-
-# Link service executable with Drogon and pqxx (Postgres client)
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    drogon
-    ${PQXX_LIB}
-)

@@ -2,3 +2,9 @@
 	path = lib/drogon
 	url = https://github.com/drogonframework/drogon.git
 
+[submodule "lib/googletest"]
+	path = lib/googletest
+	url = https://github.com/google/googletest.git
+[submodule "lib/benchmark"]
+	path = lib/benchmark
+	url = https://github.com/google/benchmark.git
