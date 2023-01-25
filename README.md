@@ -37,3 +37,7 @@ You should see response JSON message:
 
 # It's not the end, It's just the begninning
 Now you're free to start your own journey and create high-performance webservices using Drogon framework assistance.
+
+See:
+- https://github.com/alfishe/drogon-boilerplate/tree/dragon-libpqxx - Boilerplate with pqxx Postgres library integrated
+- https://github.com/alfishe/drogon-boilerplate/tree/dragon-libpqxx-gtest - Same but with Google tests
