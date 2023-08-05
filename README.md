@@ -35,7 +35,7 @@ You should see response JSON message:
 
 < The End >
 
-# It's not the end, It's just the begninning
+# It's not the end, It's just the beginning
 Now you're free to start your own journey and create high-performance webservices using Drogon framework assistance.
 
 See:
